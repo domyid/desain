@@ -9,9 +9,12 @@
 import { pasang } from './ui.js';
 import { suara, bangunkanAudio } from './sound.js';
 import { suaraAktif, setSuara } from './storage.js';
+import { stopBacakan } from './tts.js';
 import { viewHome } from './views/home.js';
 import { viewMap } from './views/map.js';
 import { viewLesson } from './views/lesson.js';
+import { viewGaleri } from './views/galeri.js';
+import { viewSertifikat } from './views/sertifikat.js';
 
 const app = document.getElementById('app');
 
@@ -19,10 +22,13 @@ function render() {
   const hash = location.hash || '#/';
   const bagian = hash.replace(/^#\//, '').split('/'); // ['', ...] atau ['peta'] dst.
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  stopBacakan(); // hentikan narasi halaman sebelumnya
 
   let view;
   if (bagian[0] === 'peta') view = viewMap();
   else if (bagian[0] === 'pelajaran') view = viewLesson(bagian[1]);
+  else if (bagian[0] === 'galeri') view = viewGaleri();
+  else if (bagian[0] === 'sertifikat') view = viewSertifikat();
   else view = viewHome();
 
   pasang(app, view);

@@ -10,6 +10,7 @@ import {
   totalBintang, totalSelesai, daftarLencana,
   namaAnak, setNama,
 } from '../storage.js';
+import { jumlahKarya } from '../galeri.js';
 import { totalPertemuan } from '../data.js';
 
 export function viewHome() {
@@ -69,7 +70,23 @@ export function viewHome() {
       onclick: () => { suara.klik(); setNama(''); render(); },
     }, `Bukan ${aman(nama)}? Ganti nama`);
 
-    return el('div', { class: 'home__cta' }, [mulai, el('div', {}, [ganti])]);
+    const pintasan = [];
+    if (jumlahKarya() > 0) {
+      pintasan.push(el('button', {
+        class: 'btn btn--ghost', onclick: () => { suara.klik(); location.hash = '#/galeri'; },
+      }, `🖼️ Galeri (${jumlahKarya()})`));
+    }
+    if (totalSelesai() >= totalPertemuan) {
+      pintasan.push(el('button', {
+        class: 'btn', onclick: () => { suara.klik(); location.hash = '#/sertifikat'; },
+      }, '🏆 Sertifikat'));
+    }
+
+    return el('div', { class: 'home__cta' }, [
+      mulai,
+      pintasan.length ? el('div', { class: 'home__pintasan' }, pintasan) : null,
+      el('div', {}, [ganti]),
+    ]);
   }
 
   function statistik() {

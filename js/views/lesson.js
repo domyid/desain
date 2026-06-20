@@ -3,11 +3,15 @@
 //   belajar (slide) → kuis → aktivitas → selesai (lencana)
 // =========================================================
 
-import { el, pasang, konfeti, bintangTeks } from '../ui.js';
+import { el, pasang, konfeti, bintangTeks, toast } from '../ui.js';
 import { mascotSVG, renderMascot } from '../mascot.js';
 import { suara } from '../sound.js';
+import { bacakan, stopBacakan, ttsTersedia } from '../tts.js';
 import { cariPertemuan } from '../data.js';
 import { selesaikan } from '../storage.js';
+import { tangkapGambar } from '../capture.js';
+import { tambahKarya } from '../galeri.js';
+import { bagikanGambar, unduhGambar } from '../share.js';
 import { sceneMewarnai } from './coloring.js';
 import { widgetMenggambar } from './draw.js';
 import { bentukSVG, ilustrasiSVG } from './shapes.js';
@@ -35,7 +39,7 @@ export function viewLesson(idStr) {
   if (p.kuis.length) tahap.push({ jenis: 'kuis' });
   if (p.aktivitas) tahap.push({ jenis: 'aktivitas' });
 
-  const state = { i: 0, benar: 0, totalKuis: p.kuis.length };
+  const state = { i: 0, benar: 0, totalKuis: p.kuis.length, karya: null };
 
   // ---- Bar kemajuan ----
   const fill = el('div', { class: 'progress-fill' });
@@ -56,7 +60,16 @@ export function viewLesson(idStr) {
     if (t.jenis === 'aktivitas') return renderAktivitas();
   }
 
-  function maju() { state.i++; suara.klik(); render(); }
+  function maju() { stopBacakan(); state.i++; suara.klik(); render(); }
+
+  // Tombol "bacakan" materi (text-to-speech) untuk anak yang belum lancar baca.
+  function tombolBacakan(teks) {
+    if (!ttsTersedia()) return null;
+    return el('button', {
+      class: 'btn-bacakan', type: 'button', 'aria-label': 'Bacakan materi',
+      onclick: (e) => { e.currentTarget.blur(); bacakan(teks); },
+    }, '🔊 Bacakan');
+  }
 
   // ---- Tahap: belajar (slide) ----
   function renderBelajar(l) {
@@ -107,11 +120,14 @@ export function viewLesson(idStr) {
     const lanjut = el('button', { class: 'btn', onclick: maju },
       state.i === tahap.length - 1 ? 'Selesai 🎉' : 'Lanjut ✨');
 
+    const bacaBtn = tombolBacakan(`${l.judul}. ${l.teks}`);
+
     pasang(isi, el('div', { class: 'step teach' }, [
       mascotBox,
       el('h3', {}, l.judul),
       ...isiTengah,
       el('p', { class: 'teach__body', html: l.teks }),
+      bacaBtn ? el('div', { class: 'baca-baris' }, [bacaBtn]) : null,
       el('div', { class: 'step-nav' }, [lanjut]),
     ]));
   }
@@ -193,7 +209,7 @@ export function viewLesson(idStr) {
       return b;
     });
 
-    const selesai = el('button', { class: 'btn btn--pink', onclick: () => { konfeti(50); maju(); } }, 'Sudah Cantik! 🌟');
+    const selesai = el('button', { class: 'btn btn--pink', onclick: () => simpanLaluMaju(svgWrap, selesai) }, 'Sudah Cantik! 🌟');
 
     pasang(isi, el('div', { class: 'step activity' }, [
       el('h3', {}, a.judul),
@@ -204,13 +220,29 @@ export function viewLesson(idStr) {
     ]));
   }
 
+  // Tangkap gambar -> simpan ke galeri -> lanjut ke layar lencana.
+  async function simpanLaluMaju(wadahEl, tombol) {
+    if (tombol) { tombol.disabled = true; tombol.textContent = 'Menyimpan… ✨'; }
+    konfeti(50);
+    try {
+      const url = await tangkapGambar(wadahEl);
+      tambahKarya({ pertemuanId: p.id, judul: p.judul, gambar: url, waktu: Date.now() });
+      state.karya = { url, namaFile: `karyaku-${slug(p.judul)}.png` };
+      toast('Tersimpan di galeri! 🖼️');
+    } catch {
+      toast('Karya tak bisa disimpan, tapi tetap lanjut ya 😊');
+    }
+    maju();
+  }
+
   // ---- Aktivitas: menggambar bebas di kanvas ----
   function renderMenggambar(a) {
-    const selesai = el('button', { class: 'btn btn--pink', onclick: () => { konfeti(50); maju(); } }, 'Karyaku Selesai! 🌟');
+    const board = widgetMenggambar(a.palet);
+    const selesai = el('button', { class: 'btn btn--pink', onclick: () => simpanLaluMaju(board, selesai) }, 'Karyaku Selesai! 🌟');
     pasang(isi, el('div', { class: 'step activity' }, [
       el('h3', {}, a.judul),
       el('p', { class: 'activity__hint' }, a.petunjuk),
-      widgetMenggambar(a.palet),
+      board,
       el('div', { class: 'step-nav' }, [selesai]),
     ]));
   }
@@ -223,6 +255,27 @@ export function viewLesson(idStr) {
     suara.menang();
     konfeti(120);
 
+    // Bagian "pamer karya": tampil bila ada karya yang tersimpan.
+    let karyaBox = null;
+    if (state.karya) {
+      const { url, namaFile } = state.karya;
+      const bagikan = el('button', {
+        class: 'btn btn--pink', onclick: async () => {
+          suara.klik();
+          const h = await bagikanGambar(url, namaFile, `Karyaku: ${p.judul} 🎨`, 'Lihat hasil belajar desainku!');
+          toast(h === 'diunduh' ? 'Gambar diunduh 📥' : h === 'dibagikan' ? 'Berhasil dibagikan! 💖' : 'Dibatalkan');
+        },
+      }, '📤 Pamerkan');
+      const unduh = el('button', {
+        class: 'btn btn--ghost', onclick: () => { suara.klik(); unduhGambar(url, namaFile); toast('Gambar diunduh 📥'); },
+      }, '📥 Unduh');
+      karyaBox = el('div', { class: 'karya-pamer' }, [
+        el('p', { class: 'karya-pamer__judul' }, 'Lihat karyamu! Tunjukkan ke keluarga 💖'),
+        el('img', { class: 'karya-pamer__img', src: url, alt: 'Karyamu' }),
+        el('div', { class: 'finish__btns' }, [bagikan, unduh]),
+      ]);
+    }
+
     pasang(isi, el('div', { class: 'step finish' }, [
       el('div', { class: 'finish__mascot mascot mascot--bounce', html: mascotSVG('bangga') }),
       el('h2', {}, 'Hebat! Kamu Lulus! 🎉'),
@@ -232,8 +285,10 @@ export function viewLesson(idStr) {
       ]),
       el('p', { style: { fontSize: '1.15rem', fontWeight: 700 } }, `Kamu dapat lencana baru: ${p.lencana.nama}!`),
       el('div', { class: 'finish__stars' }, bintangTeks(bintang)),
+      karyaBox,
       el('div', { class: 'finish__btns' }, [
-        el('button', { class: 'btn btn--ghost', onclick: () => { suara.klik(); state.i = 0; state.benar = 0; render(); } }, 'Ulangi 🔁'),
+        el('button', { class: 'btn btn--ghost', onclick: () => { suara.klik(); state.i = 0; state.benar = 0; state.karya = null; render(); } }, 'Ulangi 🔁'),
+        state.karya ? el('button', { class: 'btn btn--ghost', onclick: () => { suara.klik(); location.hash = '#/galeri'; } }, '🖼️ Galeri') : null,
         tombolPeta('Lanjut ke Peta →', 'btn btn--pink'),
       ]),
     ]));
@@ -249,6 +304,10 @@ export function viewLesson(idStr) {
   pasang(wadah, judul, track, isi);
   render();
   return wadah;
+}
+
+function slug(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
 function hitungBintang(benar, total) {

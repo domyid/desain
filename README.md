@@ -16,6 +16,10 @@ disusun **per pertemuan** seperti kelas sungguhan.
 - **Kuis & bintang** ⭐ — jawaban benar memunculkan konfeti & suara ceria.
 - **Aktivitas kreatif** — mewarnai gambar langsung di layar.
 - **Lencana 🏅** dikumpulkan tiap pertemuan, kemajuan tersimpan di perangkat (localStorage).
+- **Galeri Karyaku 🖼️** — setiap hasil menggambar/mewarnai otomatis tersimpan jadi gambar.
+- **Bagikan & Unduh 📤** — kirim karya ke WhatsApp dll (Web Share API di HP/tablet) atau unduh PNG.
+- **Sertifikat 🏆** ber-nama anak setelah menamatkan semua pertemuan — bisa diunduh/dibagikan.
+- **Narasi suara 🔊** — tombol "Bacakan" membacakan materi (text-to-speech bahasa Indonesia).
 - **Suara & animasi** lembut (bisa dimatikan lewat tombol 🔊 di pojok).
 - Menghormati `prefers-reduced-motion` untuk anak yang sensitif animasi.
 
@@ -40,17 +44,27 @@ Lalu buka **http://localhost:8000** di browser.
 index.html            Kerangka halaman + latar awan
 css/style.css         Seluruh gaya (tema pastel)
 js/
-  main.js             Router (#/ , #/peta , #/pelajaran/<id>)
+  main.js             Router (#/ , #/peta , #/pelajaran/<id> , #/galeri , #/sertifikat)
   data.js             Kurikulum 8 pertemuan  <- isi materi di sini
-  storage.js          Simpan kemajuan (localStorage)
+  storage.js          Simpan kemajuan & nama (localStorage)
+  galeri.js           Simpan/daftar karya anak (localStorage)
+  capture.js          Tangkap kanvas/SVG jadi gambar PNG
+  share.js            Bagikan (Web Share API) & unduh gambar
+  sertifikat.js       Buat sertifikat kelulusan (kanvas -> PNG)
+  tts.js              Narasi suara (Web Speech API, id-ID)
   sound.js            Efek suara (Web Audio, tanpa file)
   mascot.js           Maskot Awan (SVG original)
-  ui.js               Fungsi bantu (buat elemen, konfeti)
+  ui.js               Fungsi bantu (buat elemen, konfeti, toast)
   views/
-    home.js           Beranda
+    home.js           Beranda (sapaan nama + pintasan galeri/sertifikat)
     map.js            Peta pertemuan
-    lesson.js         Alur pelajaran (belajar->kuis->aktivitas->lencana)
-    coloring.js       Gambar mewarnai
+    lesson.js         Alur pelajaran (belajar->kuis->aktivitas->simpan->lencana)
+    coloring.js       Gambar mewarnai (adegan: taman/karakter/kastil)
+    draw.js           Kanvas menggambar bebas
+    shapes.js         Bentuk & ilustrasi (rumah/karakter/pemandangan/cerita)
+    decor.js          Contoh garis & pola
+    galeri.js         Tampilan Galeri Karyaku
+    sertifikat.js     Tampilan sertifikat
 ```
 
 ## ➕ Menambah / mengisi pertemuan

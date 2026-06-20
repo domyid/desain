@@ -322,6 +322,68 @@ h1, h2, h3, .judul { font-family: 'Baloo 2', 'Nunito', sans-serif; line-height: 
 }
 @keyframes fall { to { transform: translateY(105vh) rotate(720deg); opacity: .9; } }
 
+/* ---------- Pintasan beranda (galeri/sertifikat) ---------- */
+.home__pintasan { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+
+/* ---------- Tombol bacakan (TTS) ---------- */
+.baca-baris { margin-top: 14px; }
+.btn-bacakan {
+  font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer;
+  color: var(--biru-tua); background: #eaf6ff; border: 3px solid #cfe6f7;
+  border-radius: 999px; padding: 8px 20px; transition: transform .1s ease;
+}
+.btn-bacakan:hover { transform: translateY(-2px); }
+.btn-bacakan:active { transform: scale(.96); }
+
+/* ---------- Box pamer karya di layar lulus ---------- */
+.karya-pamer { margin: 20px 0 8px; }
+.karya-pamer__judul { font-family: 'Baloo 2'; font-weight: 700; color: var(--biru-tua); margin-bottom: 10px; }
+.karya-pamer__img {
+  max-width: 320px; width: 80%; border-radius: var(--radius-kecil);
+  box-shadow: var(--bayang); border: 6px solid #fff;
+}
+
+/* ---------- Galeri ---------- */
+.galeri-info { text-align: center; color: var(--teks-lembut); font-weight: 700; margin-bottom: 18px; }
+.galeri-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px;
+}
+.galeri-card {
+  position: relative; background: #fff; border-radius: var(--radius);
+  box-shadow: var(--bayang); padding: 12px; display: flex; flex-direction: column; gap: 10px;
+}
+.galeri-img {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #fff;
+  border-radius: var(--radius-kecil); border: 2px solid #eef4fa;
+}
+.galeri-meta { display: flex; flex-direction: column; gap: 2px; padding: 0 4px; }
+.galeri-judul { font-family: 'Baloo 2'; font-weight: 700; color: var(--teks); }
+.galeri-tanggal { font-size: .82rem; color: var(--teks-lembut); font-weight: 700; }
+.galeri-aksi { display: flex; gap: 8px; }
+.galeri-aksi .btn { flex: 1; }
+.ikon-hapus {
+  position: absolute; top: 16px; right: 16px; z-index: 2; cursor: pointer;
+  width: 38px; height: 38px; border-radius: 50%; border: none; font-size: 1.1rem;
+  background: rgba(255,255,255,.92); box-shadow: var(--bayang-kecil);
+}
+.ikon-hapus:hover { background: #fff0f6; }
+
+/* ---------- Sertifikat ---------- */
+.sertifikat-img {
+  width: 100%; max-width: 640px; margin: 14px auto 4px; display: block;
+  border-radius: var(--radius-kecil); box-shadow: var(--bayang);
+}
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 90px; transform: translate(-50%, 20px);
+  background: #4a4a6a; color: #fff; font-weight: 800; font-family: 'Baloo 2', sans-serif;
+  padding: 12px 22px; border-radius: 999px; box-shadow: var(--bayang); z-index: 200;
+  opacity: 0; transition: opacity .3s ease, transform .3s ease; pointer-events: none;
+  max-width: 90vw; text-align: center;
+}
+.toast.is-show { opacity: 1; transform: translate(-50%, 0); }
+
 /* ---------- Tombol suara ---------- */
 .sound-toggle {
   position: fixed; bottom: 18px; right: 18px; z-index: 50;

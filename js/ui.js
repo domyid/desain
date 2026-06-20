@@ -54,6 +54,14 @@ export function konfeti(jumlah = 80) {
   }
 }
 
+/** Pesan kecil melayang sebentar (mis. "Tersimpan!"). */
+export function toast(pesan) {
+  const t = el('div', { class: 'toast' }, pesan);
+  document.body.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('is-show'));
+  setTimeout(() => { t.classList.remove('is-show'); setTimeout(() => t.remove(), 300); }, 2200);
+}
+
 /** Tampilkan bintang ⭐ sejumlah n dari maksimum maks. */
 export function bintangTeks(n, maks = 3) {
   return '⭐'.repeat(n) + '☆'.repeat(Math.max(0, maks - n));

@@ -7,6 +7,7 @@ import { el } from '../ui.js';
 import { suara } from '../sound.js';
 import { pertemuan } from '../data.js';
 import { terbuka, sudahSelesai, bintangPertemuan } from '../storage.js';
+import { jumlahKarya } from '../galeri.js';
 
 export function viewMap() {
   const kembali = el('button', {
@@ -18,6 +19,9 @@ export function viewMap() {
   return el('section', {}, [
     el('div', { class: 'page-head' }, [
       kembali,
+      jumlahKarya() > 0
+        ? el('button', { class: 'btn btn--ghost btn--mini', onclick: () => { suara.klik(); location.hash = '#/galeri'; } }, `🖼️ Galeri (${jumlahKarya()})`)
+        : null,
       el('div', { class: 'spacer' }),
       el('h2', {}, 'Peta Petualangan 🗺️'),
     ]),

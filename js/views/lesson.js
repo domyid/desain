@@ -14,6 +14,7 @@ import { tambahKarya } from '../galeri.js';
 import { bagikanGambar, unduhGambar } from '../share.js';
 import { sceneMewarnai } from './coloring.js';
 import { widgetMenggambar } from './draw.js';
+import { widgetMantra } from './mantra.js';
 import { bentukSVG, ilustrasiSVG } from './shapes.js';
 import { garisSVG, polaSVG } from './decor.js';
 
@@ -200,6 +201,7 @@ export function viewLesson(idStr) {
     const a = p.aktivitas;
 
     if (a.tipe === 'menggambar') return renderMenggambar(a);
+    if (a.tipe === 'mantra') return renderMantra(a);
 
     let warnaAktif = a.palet[0];
 
@@ -247,6 +249,17 @@ export function viewLesson(idStr) {
       toast('Karya tak bisa disimpan, tapi tetap lanjut ya 😊');
     }
     maju();
+  }
+
+  // ---- Aktivitas: pembuat mantra AI (tanpa gambar tersimpan) ----
+  function renderMantra(a) {
+    const selesai = el('button', { class: 'btn btn--pink', onclick: () => { konfeti(40); maju(); } }, 'Selesai 🎉');
+    pasang(isi, el('div', { class: 'step activity' }, [
+      el('h3', {}, a.judul),
+      el('p', { class: 'activity__hint' }, a.petunjuk),
+      widgetMantra(a),
+      el('div', { class: 'step-nav' }, [selesai]),
+    ]));
   }
 
   // ---- Aktivitas: menggambar bebas di kanvas ----

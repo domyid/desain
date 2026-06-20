@@ -47,3 +47,30 @@ export async function bagikanGambar(dataURL, nama = 'karyaku.png', judul = 'Kary
   unduhGambar(dataURL, nama);
   return 'diunduh';
 }
+
+/** Salin teks ke clipboard (dengan fallback). @returns {Promise<boolean>} */
+export async function salinTeks(teks) {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(teks);
+      return true;
+    }
+  } catch { /* lanjut ke fallback */ }
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = teks; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    const ok = document.execCommand('copy');
+    ta.remove();
+    return ok;
+  } catch { return false; }
+}
+
+/** Bagikan teks (mis. mantra ke WhatsApp). @returns {'dibagikan'|'batal'|'disalin'|'gagal'} */
+export async function bagikanTeks(teks, judul = 'Mantra Gambar AI ✨') {
+  if (navigator.share) {
+    try { await navigator.share({ title: judul, text: teks }); return 'dibagikan'; }
+    catch (e) { if (e && e.name === 'AbortError') return 'batal'; }
+  }
+  return (await salinTeks(teks)) ? 'disalin' : 'gagal';
+}

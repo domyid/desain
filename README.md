@@ -62,6 +62,7 @@ js/
     lesson.js         Alur pelajaran (belajar->kuis->aktivitas->simpan->lencana)
     coloring.js       Gambar mewarnai (adegan: taman/karakter/kastil)
     draw.js           Kanvas menggambar bebas
+    mantra.js         Pembuat "mantra" (prompt) AI
     shapes.js         Bentuk & ilustrasi (rumah/karakter/pemandangan/cerita)
     decor.js          Contoh garis & pola
     galeri.js         Tampilan Galeri Karyaku
@@ -86,8 +87,13 @@ Kedelapan pertemuan sudah terisi lengkap:
 5. **Dunia Karakter** 🐶 — membuat tokoh dari bentuk + mewarnai karakter
 6. **Dunia Latar** 🏰 — jauh/dekat, warna suasana + mewarnai kastil
 7. **Dunia Cerita** 📖 — awal–tengah–akhir, bercerita lewat gambar
-8. **Pameran Karya** 🎉 — mahakarya bebas, lulus jadi "Desainer Hebat"
+8. **Sihir Gambar AI** 🤖 — membuat gambar & video dengan AI, menulis "mantra" (prompt), keamanan
+9. **Pameran Karya** 🎉 — mahakarya bebas, lulus jadi "Desainer Hebat"
 
 Tipe slide yang tersedia: `teks`, `warna`, `campur`, `bentuk`, `garis`, `pola`,
-dan `ilustrasi`. Tipe aktivitas: `mewarnai` (dengan `scene`: taman/karakter/kastil)
-dan `menggambar` (kanvas bebas).
+dan `ilustrasi`. Tipe aktivitas: `mewarnai` (dengan `scene`: taman/karakter/kastil),
+`menggambar` (kanvas bebas), dan `mantra` (pembuat prompt AI yang bisa disalin/dibagikan).
+
+> Catatan: pelajaran AI mengajarkan **konsep & cara menulis prompt** secara aman/offline.
+> Membuat gambar/video AI sungguhan dilakukan **bersama orang dewasa** di alat AI pilihan
+> (butuh akun/pengawasan), di luar aplikasi ini.

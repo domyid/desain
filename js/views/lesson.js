@@ -11,6 +11,7 @@ import { selesaikan } from '../storage.js';
 import { sceneMewarnai } from './coloring.js';
 import { widgetMenggambar } from './draw.js';
 import { bentukSVG, ilustrasiSVG } from './shapes.js';
+import { garisSVG, polaSVG } from './decor.js';
 
 export function viewLesson(idStr) {
   const p = cariPertemuan(idStr);
@@ -71,6 +72,20 @@ export function viewLesson(idStr) {
       isiTengah.push(el('div', { class: 'shape-row' }, l.bentuk.map((b) =>
         el('div', { class: 'shape-item' }, [
           el('div', { class: 'shape-box', html: bentukSVG(b.bentuk, b.warna) }),
+          el('span', { class: 'shape-name' }, b.nama),
+        ]))));
+    }
+    if (l.tipe === 'garis' && l.garis) {
+      isiTengah.push(el('div', { class: 'shape-row' }, l.garis.map((b) =>
+        el('div', { class: 'shape-item' }, [
+          el('div', { class: 'garis-box', html: garisSVG(b.garis, b.warna) }),
+          el('span', { class: 'shape-name' }, b.nama),
+        ]))));
+    }
+    if (l.tipe === 'pola' && l.pola) {
+      isiTengah.push(el('div', { class: 'shape-row' }, l.pola.map((b) =>
+        el('div', { class: 'shape-item' }, [
+          el('div', { class: 'shape-box', html: polaSVG(b.pola, b.warna, b.warna2) }),
           el('span', { class: 'shape-name' }, b.nama),
         ]))));
     }
@@ -158,7 +173,7 @@ export function viewLesson(idStr) {
 
     let warnaAktif = a.palet[0];
 
-    const svgWrap = el('div', { class: 'coloring', html: sceneMewarnai() });
+    const svgWrap = el('div', { class: 'coloring', html: sceneMewarnai(a.scene) });
     svgWrap.querySelectorAll('[data-region]').forEach((reg) => {
       reg.addEventListener('click', () => { reg.setAttribute('fill', warnaAktif); suara.pop(); });
     });

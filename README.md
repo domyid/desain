@@ -62,4 +62,17 @@ Buka `js/data.js`. Tiap pertemuan punya pola yang sama:
 - `aktivitas` — aktivitas kreatif (saat ini tipe `mewarnai`).
 - `lencana` — ikon & nama lencana yang didapat.
 
-Pertemuan 1 ("Dunia Warna") sudah lengkap sebagai contoh. Pertemuan 2–8 tinggal diisi.
+Kedelapan pertemuan sudah terisi lengkap:
+
+1. **Dunia Warna** 🌈 — warna primer, mencampur warna, hangat/sejuk
+2. **Dunia Bentuk** 🔷 — lingkaran/persegi/segitiga, menggabungkan bentuk
+3. **Dunia Garis** ✏️ — garis lurus/lengkung/zigzag & perasaannya
+4. **Dunia Pola** 🌸 — motif berulang (titik, garis, bunga, hati)
+5. **Dunia Karakter** 🐶 — membuat tokoh dari bentuk + mewarnai karakter
+6. **Dunia Latar** 🏰 — jauh/dekat, warna suasana + mewarnai kastil
+7. **Dunia Cerita** 📖 — awal–tengah–akhir, bercerita lewat gambar
+8. **Pameran Karya** 🎉 — mahakarya bebas, lulus jadi "Desainer Hebat"
+
+Tipe slide yang tersedia: `teks`, `warna`, `campur`, `bentuk`, `garis`, `pola`,
+dan `ilustrasi`. Tipe aktivitas: `mewarnai` (dengan `scene`: taman/karakter/kastil)
+dan `menggambar` (kanvas bebas).

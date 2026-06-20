@@ -284,6 +284,8 @@ h1, h2, h3, .judul { font-family: 'Baloo 2', 'Nunito', sans-serif; line-height: 
 .shape-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 22px 0; }
 .shape-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .shape-box { width: 92px; height: 92px; animation: float 3.5s ease-in-out infinite; }
+.garis-box { width: 130px; height: 66px; display: flex; align-items: center; animation: float 3.5s ease-in-out infinite; }
+.garis-box svg { width: 100%; height: 100%; }
 .shape-item:nth-child(2) .shape-box { animation-delay: .4s; }
 .shape-item:nth-child(3) .shape-box { animation-delay: .8s; }
 .shape-box svg { width: 100%; height: 100%; filter: drop-shadow(0 6px 10px rgba(120,160,210,.25)); }

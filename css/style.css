@@ -1,0 +1,298 @@
+/* =========================================================
+   Dunia Ajaib Awan — Tema desain anak (pastel, lucu, lembut)
+   ========================================================= */
+
+:root {
+  --biru: #7ec8f3;
+  --biru-tua: #4a9fd6;
+  --pink: #ffb6d5;
+  --pink-tua: #ff8fc0;
+  --mint: #b8f0d8;
+  --kuning: #ffe39b;
+  --ungu: #d3b8f5;
+  --krem: #fff7e6;
+  --teks: #4a4a6a;
+  --teks-lembut: #8a8aa8;
+  --putih: #ffffff;
+  --bayang: 0 10px 28px rgba(120, 160, 210, 0.25);
+  --bayang-kecil: 0 4px 12px rgba(120, 160, 210, 0.2);
+  --radius: 28px;
+  --radius-kecil: 18px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  color: var(--teks);
+  background: linear-gradient(180deg, #d7f0ff 0%, #eaf7ff 40%, #fff4fb 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .judul { font-family: 'Baloo 2', 'Nunito', sans-serif; line-height: 1.15; }
+
+/* ---------- Langit & awan bergerak ---------- */
+.sky { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 100px;
+  opacity: 0.85;
+  filter: blur(1px);
+}
+.cloud::before, .cloud::after {
+  content: ''; position: absolute; background: #fff; border-radius: 100px;
+}
+.cloud { width: 160px; height: 50px; }
+.cloud::before { width: 80px; height: 80px; top: -34px; left: 24px; }
+.cloud::after { width: 60px; height: 60px; top: -20px; right: 24px; }
+.cloud--1 { top: 12%; left: -200px; animation: drift 38s linear infinite; }
+.cloud--2 { top: 38%; left: -200px; transform: scale(0.7); animation: drift 52s linear infinite 6s; }
+.cloud--3 { top: 62%; left: -200px; transform: scale(1.2); opacity: 0.6; animation: drift 64s linear infinite 3s; }
+.cloud--4 { top: 80%; left: -200px; transform: scale(0.55); animation: drift 46s linear infinite 12s; }
+@keyframes drift { to { left: 110%; } }
+
+/* ---------- Tata letak ---------- */
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 18px 80px;
+  position: relative;
+}
+
+/* ---------- Kartu umum ---------- */
+.card {
+  background: var(--putih);
+  border-radius: var(--radius);
+  box-shadow: var(--bayang);
+  padding: 28px;
+}
+
+/* ---------- Tombol ---------- */
+.btn {
+  font-family: 'Baloo 2', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--biru);
+  border: none;
+  border-radius: 999px;
+  padding: 14px 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--biru-tua), var(--bayang-kecil);
+  transition: transform .08s ease, box-shadow .08s ease, filter .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover { filter: brightness(1.04); }
+.btn:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--biru-tua); }
+.btn:focus-visible { outline: 4px solid var(--ungu); outline-offset: 3px; }
+.btn--pink { background: var(--pink); box-shadow: 0 6px 0 var(--pink-tua), var(--bayang-kecil); }
+.btn--pink:active { box-shadow: 0 2px 0 var(--pink-tua); }
+.btn--ghost {
+  background: #fff; color: var(--teks);
+  box-shadow: 0 6px 0 #e3eaf2, var(--bayang-kecil);
+}
+.btn--ghost:active { box-shadow: 0 2px 0 #e3eaf2; }
+.btn--besar { font-size: 1.4rem; padding: 18px 44px; }
+.btn:disabled { opacity: .5; cursor: not-allowed; filter: grayscale(.3); }
+
+/* ---------- Maskot ---------- */
+.mascot { display: inline-block; }
+.mascot--float { animation: float 3.5s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.mascot--bounce { animation: bounce 0.6s ease; }
+@keyframes bounce { 0%,100% { transform: scale(1); } 30% { transform: scale(1.15) rotate(-4deg); } 60% { transform: scale(0.95); } }
+
+/* ===================== BERANDA ===================== */
+.home { text-align: center; padding-top: 18px; }
+.home__mascot { width: min(260px, 60vw); margin: 0 auto 6px; }
+.home__title {
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  color: var(--biru-tua);
+  text-shadow: 0 3px 0 #fff, 0 6px 14px rgba(120,160,210,.3);
+  margin-bottom: 4px;
+}
+.home__title .pink { color: var(--pink-tua); }
+.home__sub { font-size: clamp(1rem, 3.5vw, 1.3rem); color: var(--teks-lembut); font-weight: 700; margin-bottom: 26px; }
+.home__cta { margin-top: 8px; }
+.home__stats {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-top: 30px;
+}
+.stat-pill {
+  background: #fff; border-radius: var(--radius-kecil);
+  padding: 12px 20px; box-shadow: var(--bayang-kecil);
+  font-weight: 800; color: var(--teks); display: flex; align-items: center; gap: 8px;
+}
+.stat-pill .big { font-size: 1.4rem; color: var(--biru-tua); font-family: 'Baloo 2'; }
+
+/* ===================== PETA PERTEMUAN ===================== */
+.page-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.page-head h2 { font-size: clamp(1.5rem, 5vw, 2.2rem); color: var(--biru-tua); }
+.page-head .spacer { flex: 1; }
+
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
+}
+.lesson-card {
+  position: relative;
+  border: none;
+  text-align: left;
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  cursor: pointer;
+  box-shadow: var(--bayang);
+  transition: transform .12s ease, box-shadow .12s ease;
+  overflow: hidden;
+  font-family: inherit;
+  color: var(--teks);
+}
+.lesson-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--accent, var(--biru)); opacity: .12; z-index: 0;
+}
+.lesson-card > * { position: relative; z-index: 1; }
+.lesson-card:hover:not(.is-locked) { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 16px 34px rgba(120,160,210,.32); }
+.lesson-card:focus-visible { outline: 4px solid var(--ungu); outline-offset: 3px; }
+.lesson-card__emoji { font-size: 2.8rem; display: block; margin-bottom: 6px; }
+.lesson-card__no { font-weight: 800; color: var(--teks-lembut); font-size: .8rem; text-transform: uppercase; letter-spacing: 1px; }
+.lesson-card__title { font-family: 'Baloo 2'; font-size: 1.3rem; margin: 2px 0 4px; }
+.lesson-card__tag { font-size: .85rem; color: var(--teks-lembut); font-weight: 700; }
+.lesson-card.is-locked { cursor: not-allowed; filter: grayscale(.55); opacity: .8; }
+.lesson-card__lock { position: absolute; top: 16px; right: 16px; font-size: 1.5rem; z-index: 2; }
+.lesson-card__done {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  background: var(--mint); color: #2a8f63; font-weight: 800;
+  border-radius: 999px; padding: 4px 12px; font-size: .8rem;
+  box-shadow: var(--bayang-kecil);
+}
+.lesson-card__stars { margin-top: 8px; font-size: 1.1rem; letter-spacing: 2px; }
+
+/* ===================== HALAMAN PELAJARAN ===================== */
+.lesson { }
+.progress-track {
+  height: 16px; background: #e7f1fa; border-radius: 999px; overflow: hidden;
+  margin: 6px 0 22px; box-shadow: inset 0 2px 4px rgba(0,0,0,.06);
+}
+.progress-fill {
+  height: 100%; width: 0; border-radius: 999px;
+  background: linear-gradient(90deg, var(--pink), var(--biru));
+  transition: width .4s cubic-bezier(.34,1.56,.64,1);
+}
+
+.step { animation: stepIn .4s ease; }
+@keyframes stepIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+.teach { text-align: center; }
+.teach__mascot { width: 150px; margin: 0 auto 10px; }
+.teach h3 { font-size: clamp(1.4rem, 5vw, 2rem); color: var(--biru-tua); margin-bottom: 12px; }
+.teach__body { font-size: 1.2rem; line-height: 1.6; max-width: 620px; margin: 0 auto; }
+.teach__body strong { color: var(--pink-tua); }
+
+.swatch-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 22px 0; }
+.swatch {
+  width: 78px; height: 78px; border-radius: 22px; box-shadow: var(--bayang-kecil);
+  display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px;
+  color: #fff; font-weight: 800; font-size: .8rem; text-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+.mix-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 20px 0; font-size: 2rem; }
+.mix-chip { width: 56px; height: 56px; border-radius: 16px; box-shadow: var(--bayang-kecil); }
+.mix-eq { font-family: 'Baloo 2'; color: var(--teks-lembut); }
+
+/* Kuis */
+.quiz h3 { text-align: center; font-size: clamp(1.4rem,5vw,2rem); color: var(--biru-tua); margin-bottom: 6px; }
+.quiz__q { text-align: center; font-size: 1.3rem; font-weight: 800; margin: 14px 0 20px; }
+.quiz__options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; }
+.opt {
+  font-family: 'Baloo 2', sans-serif; font-size: 1.2rem; font-weight: 600;
+  background: #fff; color: var(--teks); border: 3px solid #e7f1fa;
+  border-radius: var(--radius-kecil); padding: 18px 14px; cursor: pointer;
+  transition: transform .1s ease, border-color .15s ease;
+}
+.opt:hover { transform: translateY(-3px); border-color: var(--biru); }
+.opt:focus-visible { outline: 4px solid var(--ungu); outline-offset: 2px; }
+.opt.is-correct { border-color: var(--mint); background: #eafff5; animation: pop .4s ease; }
+.opt.is-wrong { border-color: var(--pink-tua); background: #fff0f6; animation: shake .4s ease; }
+.opt:disabled { cursor: default; }
+@keyframes pop { 0%{transform:scale(1)} 50%{transform:scale(1.08)} 100%{transform:scale(1)} }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+
+.quiz__feedback { text-align: center; min-height: 32px; font-weight: 800; font-size: 1.2rem; margin-top: 16px; }
+.quiz__feedback.good { color: #2a8f63; }
+.quiz__feedback.bad { color: var(--pink-tua); }
+
+/* Aktivitas mewarnai */
+.activity { text-align: center; }
+.activity h3 { font-size: clamp(1.4rem,5vw,2rem); color: var(--biru-tua); margin-bottom: 6px; }
+.activity__hint { color: var(--teks-lembut); font-weight: 700; margin-bottom: 16px; }
+.palette { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 18px; }
+.paint {
+  width: 46px; height: 46px; border-radius: 50%; cursor: pointer;
+  border: 4px solid #fff; box-shadow: var(--bayang-kecil); transition: transform .1s ease;
+}
+.paint:hover { transform: scale(1.12); }
+.paint.is-active { transform: scale(1.2); border-color: var(--teks); }
+.coloring {
+  background: #fff; border-radius: var(--radius); box-shadow: var(--bayang-kecil);
+  max-width: 460px; margin: 0 auto; padding: 14px;
+}
+.coloring svg { width: 100%; height: auto; }
+.coloring [data-region] { cursor: pointer; transition: fill .15s ease; }
+.coloring [data-region]:hover { opacity: .85; }
+
+/* Layar selesai / badge */
+.finish { text-align: center; padding: 20px 0; }
+.finish__mascot { width: 180px; margin: 0 auto 8px; }
+.finish h2 { font-size: clamp(1.8rem,6vw,2.8rem); color: var(--pink-tua); margin-bottom: 8px; }
+.badge {
+  width: 160px; height: 160px; margin: 18px auto; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 50% 35%, #fff, var(--kuning));
+  box-shadow: 0 0 0 8px #fff, 0 0 0 14px var(--kuning), var(--bayang);
+  animation: badgePop .6s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes badgePop { from { transform: scale(0) rotate(-30deg); } to { transform: scale(1) rotate(0); } }
+.badge__icon { font-size: 4rem; }
+.badge__name { font-family: 'Baloo 2'; font-weight: 800; color: var(--teks); font-size: 1rem; padding: 0 8px; }
+.finish__stars { font-size: 2.4rem; letter-spacing: 6px; margin: 10px 0; }
+.finish__btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+
+/* ---------- Konfeti ---------- */
+.confetti-piece {
+  position: fixed; top: -20px; width: 12px; height: 12px; z-index: 999;
+  border-radius: 3px; pointer-events: none; animation: fall linear forwards;
+}
+@keyframes fall { to { transform: translateY(105vh) rotate(720deg); opacity: .9; } }
+
+/* ---------- Tombol suara ---------- */
+.sound-toggle {
+  position: fixed; bottom: 18px; right: 18px; z-index: 50;
+  width: 56px; height: 56px; border-radius: 50%; border: none; cursor: pointer;
+  background: #fff; box-shadow: var(--bayang); font-size: 1.5rem;
+  transition: transform .1s ease;
+}
+.sound-toggle:active { transform: scale(.9); }
+.sound-toggle.is-muted { filter: grayscale(1); opacity: .6; }
+
+/* ---------- Navigasi langkah ---------- */
+.step-nav { display: flex; gap: 14px; justify-content: center; margin-top: 26px; flex-wrap: wrap; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 520px) {
+  .card { padding: 20px; }
+  .btn--besar { font-size: 1.2rem; padding: 16px 32px; }
+  .swatch { width: 64px; height: 64px; }
+}
+
+/* Hormati pengguna yang tak suka animasi */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .cloud { display: none; }
+}

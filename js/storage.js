@@ -5,7 +5,7 @@
 
 const KEY = 'dunia-awan-v1';
 
-const kosong = () => ({ selesai: [], bintang: {}, lencana: [], suara: true });
+const kosong = () => ({ selesai: [], bintang: {}, lencana: [], suara: true, nama: '' });
 
 export function muat() {
   try {
@@ -55,6 +55,16 @@ export function totalSelesai() {
 
 export function daftarLencana() {
   return muat().lencana;
+}
+
+export function namaAnak() {
+  return (muat().nama || '').trim();
+}
+
+export function setNama(nama) {
+  const data = muat();
+  data.nama = String(nama || '').slice(0, 20);
+  return simpan(data);
 }
 
 export function suaraAktif() {

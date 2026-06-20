@@ -9,6 +9,8 @@ import { suara } from '../sound.js';
 import { cariPertemuan } from '../data.js';
 import { selesaikan } from '../storage.js';
 import { sceneMewarnai } from './coloring.js';
+import { widgetMenggambar } from './draw.js';
+import { bentukSVG, ilustrasiSVG } from './shapes.js';
 
 export function viewLesson(idStr) {
   const p = cariPertemuan(idStr);
@@ -64,6 +66,16 @@ export function viewLesson(idStr) {
     if (l.tipe === 'warna' && l.contoh) {
       isiTengah.push(el('div', { class: 'swatch-row' },
         l.contoh.map((c) => el('div', { class: 'swatch', style: { background: c.warna } }, c.nama))));
+    }
+    if (l.tipe === 'bentuk' && l.bentuk) {
+      isiTengah.push(el('div', { class: 'shape-row' }, l.bentuk.map((b) =>
+        el('div', { class: 'shape-item' }, [
+          el('div', { class: 'shape-box', html: bentukSVG(b.bentuk, b.warna) }),
+          el('span', { class: 'shape-name' }, b.nama),
+        ]))));
+    }
+    if (l.ilustrasi) {
+      isiTengah.push(el('div', { class: 'ilustrasi', html: ilustrasiSVG(l.ilustrasi) }));
     }
     if (l.tipe === 'campur' && l.campuran) {
       isiTengah.push(el('div', {}, l.campuran.map((m) =>
@@ -141,6 +153,9 @@ export function viewLesson(idStr) {
   // ---- Tahap: aktivitas (mewarnai) ----
   function renderAktivitas() {
     const a = p.aktivitas;
+
+    if (a.tipe === 'menggambar') return renderMenggambar(a);
+
     let warnaAktif = a.palet[0];
 
     const svgWrap = el('div', { class: 'coloring', html: sceneMewarnai() });
@@ -170,6 +185,17 @@ export function viewLesson(idStr) {
       el('p', { class: 'activity__hint' }, a.petunjuk),
       el('div', { class: 'palette' }, tombolPalet),
       svgWrap,
+      el('div', { class: 'step-nav' }, [selesai]),
+    ]));
+  }
+
+  // ---- Aktivitas: menggambar bebas di kanvas ----
+  function renderMenggambar(a) {
+    const selesai = el('button', { class: 'btn btn--pink', onclick: () => { konfeti(50); maju(); } }, 'Karyaku Selesai! 🌟');
+    pasang(isi, el('div', { class: 'step activity' }, [
+      el('h3', {}, a.judul),
+      el('p', { class: 'activity__hint' }, a.petunjuk),
+      widgetMenggambar(a.palet),
       el('div', { class: 'step-nav' }, [selesai]),
     ]));
   }

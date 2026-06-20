@@ -98,9 +98,67 @@ export const pertemuan = [
     },
   },
 
-  // -------- Pertemuan berikutnya (terkunci, kerangka siap diisi) --------
-  { id: 2, judul: 'Dunia Bentuk', emoji: '🔷', tag: 'Bentuk dasar', warna: '#ffb6d5',
-    lencana: { ikon: '⭐', nama: 'Penjelajah Bentuk' }, langkah: [], kuis: [], aktivitas: null },
+  {
+    id: 2,
+    judul: 'Dunia Bentuk',
+    emoji: '🔷',
+    tag: 'Bentuk dasar',
+    warna: '#ffb6d5',
+    lencana: { ikon: '⭐', nama: 'Penjelajah Bentuk' },
+
+    langkah: [
+      {
+        tipe: 'teks',
+        mood: 'semangat',
+        judul: 'Masuk ke Dunia Bentuk!',
+        teks: 'Tahukah kamu? <strong>Semua gambar</strong> tersusun dari bentuk-bentuk sederhana. Kalau kita tahu bentuk dasar, kita bisa menggambar <strong>apa saja</strong>! Yuk berkenalan dengan mereka. 🔷',
+      },
+      {
+        tipe: 'bentuk',
+        mood: 'senang',
+        judul: 'Bentuk Dasar',
+        teks: 'Ini tiga bentuk paling sering dipakai. Coba sebutkan namanya bersama Awan!',
+        bentuk: [
+          { bentuk: 'lingkaran', warna: '#4fc3f7', nama: 'Lingkaran' },
+          { bentuk: 'persegi', warna: '#5fcf80', nama: 'Persegi' },
+          { bentuk: 'segitiga', warna: '#ffb74d', nama: 'Segitiga' },
+        ],
+      },
+      {
+        tipe: 'teks',
+        mood: 'mikir',
+        judul: 'Bentuk Ada di Mana-mana',
+        teks: 'Coba lihat sekelilingmu! 🎡 Roda itu <strong>lingkaran</strong>, jendela itu <strong>persegi</strong>, dan atap rumah itu <strong>segitiga</strong>. Bentuk bersembunyi di banyak benda!',
+      },
+      {
+        tipe: 'bentuk',
+        mood: 'semangat',
+        judul: 'Menggabungkan Bentuk',
+        teks: 'Sihir desain: gabungkan bentuk jadi gambar baru! <strong>Segitiga + persegi = rumah</strong> 🏠. Bentuk-bentuk kecil bekerja sama.',
+        ilustrasi: 'rumah',
+      },
+      {
+        tipe: 'teks',
+        mood: 'bangga',
+        judul: 'Kamu Hampir Jago!',
+        teks: 'Sekarang kamu tahu rahasianya: untuk menggambar sesuatu yang sulit, pecah dulu jadi <strong>bentuk-bentuk sederhana</strong>. Ayo buktikan di kuis & gambar! ✨',
+      },
+    ],
+
+    kuis: [
+      { soal: 'Bentuk yang bulat tanpa sudut?', pilihan: ['Segitiga', 'Lingkaran', 'Persegi'], benar: 1 },
+      { soal: 'Atap rumah biasanya berbentuk?', pilihan: ['Lingkaran', 'Persegi', 'Segitiga'], benar: 2 },
+      { soal: 'Berapa jumlah sisi persegi?', pilihan: ['3', '4', '5'], benar: 1 },
+      { soal: 'Bola dan roda berbentuk seperti?', pilihan: ['Lingkaran', 'Segitiga', 'Persegi'], benar: 0 },
+    ],
+
+    aktivitas: {
+      tipe: 'menggambar',
+      judul: 'Gambar Rumah Impianmu! 🏠',
+      petunjuk: 'Pakai persegi, segitiga, dan lingkaran untuk menggambar rumah, pohon, atau apa pun yang kamu suka. Pilih warna & ukuran kuas, lalu coret di kanvas!',
+      palet: ['#4fc3f7', '#5fcf80', '#ffd93b', '#ff7aa8', '#ff9f43', '#a96fd0', '#4a4a6a', '#ffffff'],
+    },
+  },
   { id: 3, judul: 'Dunia Garis', emoji: '✏️', tag: 'Garis & goresan', warna: '#b8f0d8',
     lencana: { ikon: '✏️', nama: 'Tukang Garis' }, langkah: [], kuis: [], aktivitas: null },
   { id: 4, judul: 'Dunia Pola', emoji: '🌸', tag: 'Pola & motif', warna: '#ffe39b',

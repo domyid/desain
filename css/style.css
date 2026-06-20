@@ -264,6 +264,55 @@ h1, h2, h3, .judul { font-family: 'Baloo 2', 'Nunito', sans-serif; line-height: 
 .finish__stars { font-size: 2.4rem; letter-spacing: 6px; margin: 10px 0; }
 .finish__btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
 
+/* ---------- Input nama (beranda) ---------- */
+.nama-box { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 4px; }
+.nama-tanya { font-family: 'Baloo 2'; font-size: 1.25rem; color: var(--biru-tua); font-weight: 700; }
+.nama-input {
+  font-family: 'Nunito', sans-serif; font-size: 1.2rem; font-weight: 700; text-align: center;
+  color: var(--teks); background: #fff; border: 3px solid #e7f1fa; border-radius: 999px;
+  padding: 14px 24px; width: min(320px, 80vw); box-shadow: var(--bayang-kecil); outline: none;
+}
+.nama-input:focus { border-color: var(--pink); }
+.tautan-ganti {
+  background: none; border: none; cursor: pointer; margin-top: 14px;
+  color: var(--teks-lembut); font-family: 'Nunito'; font-weight: 700; font-size: .95rem;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.tautan-ganti:hover { color: var(--biru-tua); }
+
+/* ---------- Bentuk (materi Dunia Bentuk) ---------- */
+.shape-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 22px 0; }
+.shape-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.shape-box { width: 92px; height: 92px; animation: float 3.5s ease-in-out infinite; }
+.shape-item:nth-child(2) .shape-box { animation-delay: .4s; }
+.shape-item:nth-child(3) .shape-box { animation-delay: .8s; }
+.shape-box svg { width: 100%; height: 100%; filter: drop-shadow(0 6px 10px rgba(120,160,210,.25)); }
+.shape-name { font-family: 'Baloo 2'; font-weight: 700; color: var(--teks); }
+.ilustrasi { width: min(260px, 70vw); margin: 18px auto 4px; }
+.ilustrasi svg { width: 100%; height: auto; filter: drop-shadow(0 8px 14px rgba(120,160,210,.25)); }
+
+/* ---------- Menggambar bebas ---------- */
+.draw { max-width: 520px; margin: 0 auto; }
+.draw__tools { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 14px; }
+.draw__board {
+  background: #fff; border-radius: var(--radius); box-shadow: var(--bayang-kecil);
+  padding: 10px; line-height: 0;
+}
+.draw-canvas {
+  width: 100%; height: auto; border-radius: var(--radius-kecil);
+  background: #fff; cursor: crosshair; touch-action: none; display: block;
+}
+.brush-row { display: flex; gap: 10px; justify-content: center; }
+.brush {
+  width: 46px; height: 46px; border-radius: 14px; cursor: pointer; background: #fff;
+  border: 3px solid #e7f1fa; display: flex; align-items: center; justify-content: center;
+  transition: transform .1s ease, border-color .15s ease;
+}
+.brush:hover { transform: translateY(-2px); }
+.brush.is-active { border-color: var(--biru); }
+.brush__dot { background: var(--teks); border-radius: 50%; display: block; }
+.btn--mini { font-size: .95rem; padding: 10px 18px; }
+
 /* ---------- Konfeti ---------- */
 .confetti-piece {
   position: fixed; top: -20px; width: 12px; height: 12px; z-index: 999;

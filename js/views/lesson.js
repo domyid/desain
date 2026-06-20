@@ -140,29 +140,39 @@ export function viewLesson(idStr) {
       const q = p.kuis[ke];
       const feedback = el('div', { class: 'quiz__feedback' }, ' ');
       let terjawab = false;
+      const navBaris = el('div', { class: 'step-nav', style: { marginTop: '8px' } });
+      const lanjut = () => {
+        stopBacakan();
+        ke++;
+        if (ke < p.kuis.length) soalKe();
+        else { state.i++; render(); }
+      };
 
       const opsi = q.pilihan.map((teks, idx) => el('button', {
         class: 'opt',
-        onclick: (e) => jawab(e.currentTarget, idx, opsi, q, feedback, () => {
-          ke++;
-          if (ke < p.kuis.length) soalKe();
-          else { state.i++; render(); }
-        }, () => (terjawab ? true : (terjawab = true, false))),
+        onclick: (e) => {
+          if (terjawab) return;
+          terjawab = true;
+          jawab(e.currentTarget, idx, opsi, q, feedback, navBaris, lanjut, ke === p.kuis.length - 1);
+        },
       }, teks));
 
+      const bacaBtn = tombolBacakan(q.soal);
+
       pasang(isi, el('div', { class: 'step quiz' }, [
-        el('h3', {}, `Kuis ${q ? ke + 1 : ''} dari ${p.kuis.length} 🧠`),
+        el('div', { class: 'quiz__nomor' }, `Soal ${ke + 1} dari ${p.kuis.length} 🧠`),
         el('p', { class: 'quiz__q' }, q.soal),
+        bacaBtn ? el('div', { class: 'baca-baris', style: { marginBottom: '12px' } }, [bacaBtn]) : null,
         el('div', { class: 'quiz__options' }, opsi),
         feedback,
+        navBaris,
       ]));
     }
 
     soalKe();
   }
 
-  function jawab(btn, idx, opsi, q, feedback, lanjut, sudah) {
-    if (sudah()) return;
+  function jawab(btn, idx, opsi, q, feedback, navBaris, lanjut, terakhir) {
     opsi.forEach((o) => (o.disabled = true));
     if (idx === q.benar) {
       btn.classList.add('is-correct');
@@ -174,11 +184,15 @@ export function viewLesson(idStr) {
     } else {
       btn.classList.add('is-wrong');
       opsi[q.benar].classList.add('is-correct');
-      feedback.textContent = 'Hampir! Jawabannya yang hijau ya 💛';
+      feedback.textContent = 'Belum tepat. Jawaban benar berwarna hijau 💛';
       feedback.className = 'quiz__feedback bad';
       suara.salah();
     }
-    setTimeout(lanjut, 1400);
+    if (q.penjelasan) {
+      navBaris.appendChild(el('p', { class: 'quiz__penjelasan' }, `💡 ${q.penjelasan}`));
+    }
+    navBaris.appendChild(el('button', { class: 'btn', onclick: lanjut },
+      terakhir ? 'Lihat Hasil 🎉' : 'Lanjut →'));
   }
 
   // ---- Tahap: aktivitas (mewarnai) ----

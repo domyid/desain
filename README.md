@@ -13,7 +13,8 @@ disusun **per pertemuan** seperti kelas sungguhan.
 
 - **Peta petualangan** berisi 8 pertemuan yang terbuka bertahap (selesaikan satu untuk membuka berikutnya).
 - **Belajar** lewat slide bergambar maskot dengan ekspresi.
-- **Kuis & bintang** ⭐ — jawaban benar memunculkan konfeti & suara ceria.
+- **Kuis & bintang** ⭐ — soal penalaran/penerapan (4 pilihan) dengan penjelasan "kenapa"
+  setelah menjawab; jawaban benar memunculkan konfeti & suara ceria.
 - **Aktivitas kreatif** — mewarnai gambar langsung di layar.
 - **Lencana 🏅** dikumpulkan tiap pertemuan, kemajuan tersimpan di perangkat (localStorage).
 - **Galeri Karyaku 🖼️** — setiap hasil menggambar/mewarnai otomatis tersimpan jadi gambar.

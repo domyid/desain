@@ -208,6 +208,12 @@ h1, h2, h3, .judul { font-family: 'Baloo 2', 'Nunito', sans-serif; line-height: 
 
 /* Kuis */
 .quiz h3 { text-align: center; font-size: clamp(1.4rem,5vw,2rem); color: var(--biru-tua); margin-bottom: 6px; }
+.quiz__nomor { text-align: center; font-family: 'Baloo 2'; font-weight: 700; color: var(--teks-lembut); margin-bottom: 6px; }
+.quiz__penjelasan {
+  background: #eafff5; color: #2a6f52; border-radius: var(--radius-kecil);
+  padding: 12px 18px; font-weight: 700; max-width: 520px; margin: 0 auto;
+  line-height: 1.5; animation: stepIn .3s ease;
+}
 .quiz__q { text-align: center; font-size: 1.3rem; font-weight: 800; margin: 14px 0 20px; }
 .quiz__options { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; }
 .opt {

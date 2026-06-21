@@ -478,6 +478,16 @@ h1, h2, h3, .judul { font-family: 'Baloo 2', 'Nunito', sans-serif; line-height: 
 }
 .toast.is-show { opacity: 1; transform: translate(-50%, 0); }
 
+/* ---------- Tombol pasang aplikasi (PWA) ---------- */
+.install-btn {
+  position: fixed; bottom: 18px; left: 18px; z-index: 50;
+  font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer;
+  color: #fff; background: var(--pink); border: none; border-radius: 999px;
+  padding: 12px 20px; box-shadow: 0 6px 0 var(--pink-tua), var(--bayang-kecil);
+  animation: float 3s ease-in-out infinite;
+}
+.install-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--pink-tua); }
+
 /* ---------- Tombol suara ---------- */
 .sound-toggle {
   position: fixed; bottom: 18px; right: 18px; z-index: 50;

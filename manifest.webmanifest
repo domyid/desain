@@ -1,0 +1,17 @@
+{
+  "name": "Dunia Ajaib Awan",
+  "short_name": "Dunia Awan",
+  "description": "Kelas desain & menggambar yang seru untuk anak.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eaf7ff",
+  "theme_color": "#7ec8f3",
+  "lang": "id",
+  "categories": ["education", "kids"],
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

@@ -60,5 +60,35 @@ perbaruiTombolSuara();
 // Bangunkan audio pada interaksi pertama (kebijakan browser).
 window.addEventListener('pointerdown', () => bangunkanAudio(), { once: true });
 
+// ---- PWA: service worker + tombol pasang ----
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(() => {}); });
+}
+
+let promptPasang = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  promptPasang = e;
+  let tombol = document.getElementById('install-btn');
+  if (!tombol) {
+    tombol = document.createElement('button');
+    tombol.id = 'install-btn';
+    tombol.className = 'install-btn';
+    tombol.textContent = '📲 Pasang Aplikasi';
+    tombol.addEventListener('click', async () => {
+      if (!promptPasang) return;
+      promptPasang.prompt();
+      await promptPasang.userChoice;
+      promptPasang = null;
+      tombol.remove();
+    });
+    document.body.appendChild(tombol);
+  }
+});
+window.addEventListener('appinstalled', () => {
+  promptPasang = null;
+  document.getElementById('install-btn')?.remove();
+});
+
 // Render awal bila DOMContentLoaded sudah lewat.
 if (document.readyState !== 'loading') render();

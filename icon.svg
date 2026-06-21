@@ -1,0 +1,45 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dunia Ajaib Awan">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ec8f3"/>
+      <stop offset="1" stop-color="#bfe6ff"/>
+    </linearGradient>
+  </defs>
+  <!-- latar penuh (maskable) -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- bintang hias -->
+  <circle cx="90" cy="100" r="6" fill="#fff" opacity=".8"/>
+  <circle cx="430" cy="120" r="8" fill="#fff" opacity=".8"/>
+  <circle cx="410" cy="380" r="6" fill="#fff" opacity=".7"/>
+  <circle cx="100" cy="400" r="7" fill="#fff" opacity=".7"/>
+
+  <!-- kuping panjang -->
+  <path d="M170 250 C120 268 110 380 160 410 C190 392 186 320 192 280 Z" fill="#fff"/>
+  <path d="M342 250 C392 268 402 380 352 410 C322 392 326 320 320 280 Z" fill="#fff"/>
+  <path d="M150 360 C142 384 152 404 168 408 C178 392 174 372 170 360 Z" fill="#ffd7e8"/>
+  <path d="M362 360 C370 384 360 404 344 408 C334 392 338 372 342 360 Z" fill="#ffd7e8"/>
+
+  <!-- kepala awan -->
+  <g fill="#fff">
+    <circle cx="256" cy="270" r="120"/>
+    <circle cx="170" cy="280" r="66"/>
+    <circle cx="342" cy="280" r="66"/>
+    <circle cx="256" cy="190" r="76"/>
+  </g>
+  <circle cx="256" cy="262" r="112" fill="#fff"/>
+
+  <!-- pipi -->
+  <circle cx="178" cy="300" r="30" fill="#ffc2dd" opacity=".85"/>
+  <circle cx="334" cy="300" r="30" fill="#ffc2dd" opacity=".85"/>
+
+  <!-- mata & mulut -->
+  <circle cx="214" cy="258" r="15" fill="#4a4a6a"/>
+  <circle cx="298" cy="258" r="15" fill="#4a4a6a"/>
+  <circle cx="209" cy="252" r="5" fill="#fff"/>
+  <circle cx="293" cy="252" r="5" fill="#fff"/>
+  <ellipse cx="256" cy="288" rx="11" ry="7" fill="#9bd0ef"/>
+  <path d="M232 300 Q256 322 280 300" fill="none" stroke="#4a4a6a" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- pilinan -->
+  <path d="M300 150 C322 128 356 138 350 164 C347 182 322 180 322 166" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+</svg>

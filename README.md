@@ -22,6 +22,9 @@ disusun **per pertemuan** seperti kelas sungguhan.
 - **Sertifikat 🏆** ber-nama anak setelah menamatkan semua pertemuan — bisa diunduh/dibagikan.
 - **Narasi suara 🔊** — tombol "Bacakan" membacakan materi (text-to-speech bahasa Indonesia).
 - **Suara & animasi** lembut (bisa dimatikan lewat tombol 🔊 di pojok).
+- **Tujuan & ringkasan** tiap pertemuan + **streak harian** 🔥 dan tantangan harian.
+- **Laporan Orang Tua** 📊 (di balik gerbang sederhana): progres, nilai, saran, kontrol.
+- **PWA** — bisa **dipasang** sebagai aplikasi di tablet/HP dan **jalan offline**.
 - Menghormati `prefers-reduced-motion` untuk anak yang sensitif animasi.
 
 ## ▶️ Cara menjalankan

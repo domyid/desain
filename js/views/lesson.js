@@ -15,6 +15,7 @@ import { bagikanGambar, unduhGambar } from '../share.js';
 import { sceneMewarnai } from './coloring.js';
 import { widgetMenggambar } from './draw.js';
 import { widgetMantra } from './mantra.js';
+import { widgetMenggambarBertahap } from './guided.js';
 import { bentukSVG, ilustrasiSVG } from './shapes.js';
 import { garisSVG, polaSVG } from './decor.js';
 
@@ -216,6 +217,7 @@ export function viewLesson(idStr) {
     const a = p.aktivitas;
 
     if (a.tipe === 'menggambar') return renderMenggambar(a);
+    if (a.tipe === 'bertahap') return renderBertahap(a);
     if (a.tipe === 'mantra') return renderMantra(a);
 
     let warnaAktif = a.palet[0];
@@ -273,6 +275,18 @@ export function viewLesson(idStr) {
       el('h3', {}, a.judul),
       el('p', { class: 'activity__hint' }, a.petunjuk),
       widgetMantra(a),
+      el('div', { class: 'step-nav' }, [selesai]),
+    ]));
+  }
+
+  // ---- Aktivitas: menggambar bertahap (tutorial) ----
+  function renderBertahap(a) {
+    const board = widgetMenggambarBertahap(a);
+    const selesai = el('button', { class: 'btn btn--pink', onclick: () => simpanLaluMaju(board, selesai) }, 'Karyaku Selesai! 🌟');
+    pasang(isi, el('div', { class: 'step activity' }, [
+      el('h3', {}, a.judul),
+      el('p', { class: 'activity__hint' }, a.petunjuk),
+      board,
       el('div', { class: 'step-nav' }, [selesai]),
     ]));
   }

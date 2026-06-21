@@ -159,10 +159,23 @@ export const pertemuan = [
     ],
 
     aktivitas: {
-      tipe: 'menggambar',
-      judul: 'Gambar Rumah Impianmu! 🏠',
-      petunjuk: 'Pakai persegi, segitiga, dan lingkaran untuk menggambar rumah, pohon, atau apa pun yang kamu suka. Pilih warna & ukuran kuas, lalu coret di kanvas!',
-      palet: ['#4fc3f7', '#5fcf80', '#ffd93b', '#ff7aa8', '#ff9f43', '#a96fd0', '#4a4a6a', '#ffffff'],
+      tipe: 'bertahap',
+      judul: 'Ayo Gambar Kucing dari Bentuk! 🐱',
+      petunjuk: 'Ikuti tiap langkah: tebalkan garis merah muda putus-putus, lalu tekan "Langkah Berikutnya". Pelan-pelan saja, kamu pasti bisa!',
+      lebar: 360, tinggi: 360,
+      palet: ['#4a4a6a', '#ffb74d', '#ff7aa8', '#7ec8f3', '#5fcf80', '#a96fd0', '#ffffff'],
+      langkah: [
+        { teks: 'Gambar LINGKARAN besar untuk kepala 🟠',
+          svg: '<circle cx="180" cy="195" r="95"/>' },
+        { teks: 'Tambah dua SEGITIGA untuk telinga',
+          svg: '<polygon points="112,128 96,52 168,98"/><polygon points="248,128 264,52 192,98"/>' },
+        { teks: 'Buat dua LINGKARAN kecil untuk mata',
+          svg: '<circle cx="150" cy="188" r="15"/><circle cx="210" cy="188" r="15"/>' },
+        { teks: 'Tambah hidung SEGITIGA kecil dan mulut',
+          svg: '<polygon points="180,206 169,219 191,219"/><path d="M180 219 Q166 236 151 226 M180 219 Q194 236 209 226"/>' },
+        { teks: 'Terakhir, beri kumis dan pipi yang manis! 🐾',
+          svg: '<circle cx="126" cy="206" r="11"/><circle cx="234" cy="206" r="11"/><path d="M120 198 L70 188 M120 208 L70 210 M240 198 L290 188 M240 208 L290 210"/>' },
+      ],
     },
   },
   {

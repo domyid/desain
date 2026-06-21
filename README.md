@@ -65,7 +65,9 @@ js/
     lesson.js         Alur pelajaran (belajar->kuis->aktivitas->simpan->lencana)
     coloring.js       Gambar mewarnai (adegan: taman/karakter/kastil)
     draw.js           Kanvas menggambar bebas
+    guided.js         Menggambar bertahap (tutorial ikuti-aku)
     mantra.js         Pembuat "mantra" (prompt) AI
+    laporan.js        Laporan untuk orang tua
     shapes.js         Bentuk & ilustrasi (rumah/karakter/pemandangan/cerita)
     decor.js          Contoh garis & pola
     galeri.js         Tampilan Galeri Karyaku
@@ -95,7 +97,8 @@ Kedelapan pertemuan sudah terisi lengkap:
 
 Tipe slide yang tersedia: `teks`, `warna`, `campur`, `bentuk`, `garis`, `pola`,
 dan `ilustrasi`. Tipe aktivitas: `mewarnai` (dengan `scene`: taman/karakter/kastil),
-`menggambar` (kanvas bebas), dan `mantra` (pembuat prompt AI yang bisa disalin/dibagikan).
+`menggambar` (kanvas bebas), `bertahap` (menggambar tutorial ikuti-aku langkah demi
+langkah), dan `mantra` (pembuat prompt AI yang bisa disalin/dibagikan).
 
 > Catatan: pelajaran AI mengajarkan **konsep & cara menulis prompt** secara aman/offline.
 > Membuat gambar/video AI sungguhan dilakukan **bersama orang dewasa** di alat AI pilihan

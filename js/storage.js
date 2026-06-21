@@ -5,7 +5,7 @@
 
 const KEY = 'dunia-awan-v1';
 
-const kosong = () => ({ selesai: [], bintang: {}, lencana: [], suara: true, nama: '' });
+const kosong = () => ({ selesai: [], bintang: {}, lencana: [], suara: true, nama: '', streak: 0, streakBest: 0, lastTanggal: '' });
 
 export function muat() {
   try {
@@ -80,4 +80,44 @@ export function setSuara(aktif) {
 /** Hapus semua kemajuan (untuk tombol "mulai ulang" orang tua). */
 export function resetSemua() {
   simpan(kosong());
+}
+
+// ---- Streak harian ----
+function tanggalHariIni() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function selisihHari(a, b) {
+  const [ay, am, ad] = a.split('-').map(Number);
+  const [by, bm, bd] = b.split('-').map(Number);
+  const ms = Date.UTC(by, bm - 1, bd) - Date.UTC(ay, am - 1, ad);
+  return Math.round(ms / 86400000);
+}
+
+/**
+ * Catat kunjungan hari ini & perbarui streak.
+ * @returns {{streak:number, naik:boolean}} naik=true bila streak bertambah hari ini
+ */
+export function catatStreak() {
+  const data = muat();
+  const hari = tanggalHariIni();
+  if (data.lastTanggal === hari) {
+    return { streak: data.streak || 1, naik: false };
+  }
+  const beda = data.lastTanggal ? selisihHari(data.lastTanggal, hari) : null;
+  if (beda === 1) data.streak = (data.streak || 0) + 1; // lanjut dari kemarin
+  else data.streak = 1;                                  // mulai/ulang dari hari ini
+  data.lastTanggal = hari;
+  data.streakBest = Math.max(data.streakBest || 0, data.streak);
+  simpan(data);
+  return { streak: data.streak, naik: true };
+}
+
+export function streakSekarang() {
+  return muat().streak || 0;
+}
+
+export function streakTerbaik() {
+  return muat().streakBest || 0;
 }

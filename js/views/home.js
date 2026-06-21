@@ -8,10 +8,25 @@ import { mascotSVG } from '../mascot.js';
 import { suara } from '../sound.js';
 import {
   totalBintang, totalSelesai, daftarLencana,
-  namaAnak, setNama,
+  namaAnak, setNama, streakSekarang,
 } from '../storage.js';
 import { jumlahKarya } from '../galeri.js';
 import { totalPertemuan } from '../data.js';
+
+const TANTANGAN = [
+  '🎨 Selesaikan 1 pertemuan hari ini',
+  '🖌️ Buat 1 karya baru di galeri',
+  '⭐ Kumpulkan 3 bintang di satu kuis',
+  '🌈 Coba warnai dengan warna kesukaanmu',
+  '🤖 Buat 1 mantra ajaib untuk AI',
+  '🏅 Buka 1 lencana baru',
+  '✏️ Gambar sesuatu pakai garis lengkung',
+];
+function tantanganHariIni() {
+  const d = new Date();
+  const hariKe = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 86400000);
+  return TANTANGAN[hariKe % TANTANGAN.length];
+}
 
 export function viewHome() {
   const wadah = el('section', { class: 'home', style: { padding: '8px' } });
@@ -25,8 +40,28 @@ export function viewHome() {
       nama ? sapaan(nama) : el('h1', { class: 'home__title', html: 'Dunia Ajaib <span class="pink">Awan</span>' }),
       el('p', { class: 'home__sub' }, nama ? 'Yuk lanjut berpetualang di kelas desain! ✨' : 'Kelas desain & menggambar yang seru ✨'),
       nama ? bagianMulai(nama) : bagianNama(),
+      nama ? kartuHarian() : null,
       nama ? statistik() : null,
+      nama ? el('button', {
+        class: 'tautan-ortu', type: 'button',
+        onclick: () => { suara.klik(); location.hash = '#/laporan'; },
+      }, '📊 Untuk Orang Tua') : null,
     );
+  }
+
+  function kartuHarian() {
+    const s = streakSekarang();
+    return el('div', { class: 'kartu-harian' }, [
+      el('div', { class: 'streak' }, [
+        el('span', { class: 'streak__api' }, '🔥'),
+        el('span', { class: 'streak__angka' }, String(s)),
+        el('span', { class: 'streak__teks' }, s === 1 ? 'hari belajar' : 'hari berturut-turut'),
+      ]),
+      el('div', { class: 'tantangan' }, [
+        el('span', { class: 'tantangan__label' }, 'Tantangan hari ini'),
+        el('span', { class: 'tantangan__isi' }, tantanganHariIni()),
+      ]),
+    ]);
   }
 
   function sapaan(nama) {

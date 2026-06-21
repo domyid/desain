@@ -475,3 +475,33 @@ export function cariPertemuan(id) {
 }
 
 export const totalPertemuan = pertemuan.length;
+
+// =========================================================
+// Panduan tiap pertemuan: tujuan belajar (ditampilkan di awal)
+// dan ringkasan (ditampilkan di akhir). Membuat terasa
+// berkurikulum seperti kursus profesional.
+// =========================================================
+const panduan = {
+  1: { tujuan: ['Mengenal 3 warna utama: merah, kuning, biru', 'Mencampur warna menjadi warna baru', 'Membedakan warna hangat dan sejuk'],
+       ringkasan: ['Warna utama: merah, kuning, biru', 'Biru + kuning = hijau', 'Warna hangat ceria, warna sejuk menenangkan'] },
+  2: { tujuan: ['Mengenal bentuk dasar: lingkaran, persegi, segitiga', 'Menggabungkan bentuk menjadi gambar', 'Memecah benda jadi bentuk sederhana'],
+       ringkasan: ['Bentuk dasar ada di mana-mana', 'Rumah = persegi + segitiga', 'Gambar rumit dimulai dari bentuk sederhana'] },
+  3: { tujuan: ['Mengenal jenis garis: lurus, lengkung, zigzag', 'Memahami bahwa garis punya "rasa"', 'Memilih garis sesuai gambar'],
+       ringkasan: ['Lurus = tenang, lengkung = lembut, zigzag = seru', 'Garis tebal terasa kuat dan berani', 'Gambar dibangun dari garis'] },
+  4: { tujuan: ['Memahami arti pola (motif berulang)', 'Membuat pola dari bentuk sederhana', 'Menjaga jarak agar pola rapi'],
+       ringkasan: ['Pola = motif yang berulang teratur', 'Jarak yang sama membuat pola rapi', 'Pola ada di batik, baju, kertas kado'] },
+  5: { tujuan: ['Membuat karakter dari bentuk sederhana', 'Membuat karakter terlihat hidup', 'Berani berkreasi dengan warna'],
+       ringkasan: ['Wajah dimulai dari lingkaran', 'Mata besar & senyum bikin karakter hidup', 'Karaktermu bebas berwarna apa saja'] },
+  6: { tujuan: ['Memahami fungsi latar (background)', 'Menggambar kesan jauh dan dekat', 'Memakai warna untuk suasana'],
+       ringkasan: ['Latar menunjukkan tempat & suasana', 'Jauh = kecil di atas, dekat = besar di bawah', 'Warna gelap = malam, terang = siang'] },
+  7: { tujuan: ['Memahami cerita: awal, tengah, akhir', 'Menggabungkan karakter dan latar', 'Bercerita lewat satu gambar'],
+       ringkasan: ['Cerita punya awal, tengah, akhir', 'Karakter + latar = gambar bercerita', 'Gambar sederhana pun bisa berkesan'] },
+  8: { tujuan: ['Mengenal AI sebagai alat bantu kreatif', 'Menulis "mantra" (prompt) yang jelas', 'Memakai AI dengan aman'],
+       ringkasan: ['Prompt = mantra untuk AI', 'Resep: siapa + sedang apa + di mana + gaya', 'Pakai AI selalu bersama orang dewasa'] },
+  9: { tujuan: ['Menggabungkan semua yang dipelajari', 'Membuat karya bebas yang dibanggakan', 'Berani memamerkan karya'],
+       ringkasan: ['Kamu menguasai warna, bentuk, garis, pola, karakter, latar, cerita & AI', 'Desainer hebat berani mencoba', 'Karyamu layak dipamerkan!'] },
+};
+
+export function panduanPertemuan(id) {
+  return panduan[Number(id)] || null;
+}

@@ -7,7 +7,7 @@ import { el, pasang, konfeti, bintangTeks, toast } from '../ui.js';
 import { mascotSVG, renderMascot } from '../mascot.js';
 import { suara } from '../sound.js';
 import { bacakan, stopBacakan, ttsTersedia } from '../tts.js';
-import { cariPertemuan } from '../data.js';
+import { cariPertemuan, panduanPertemuan } from '../data.js';
 import { selesaikan } from '../storage.js';
 import { tangkapGambar } from '../capture.js';
 import { tambahKarya } from '../galeri.js';
@@ -36,6 +36,8 @@ export function viewLesson(idStr) {
 
   // ---- Susun daftar tahap ----
   const tahap = [];
+  const panduan = panduanPertemuan(p.id);
+  if (panduan && panduan.tujuan) tahap.push({ jenis: 'intro', data: panduan });
   p.langkah.forEach((l) => tahap.push({ jenis: 'belajar', data: l }));
   if (p.kuis.length) tahap.push({ jenis: 'kuis' });
   if (p.aktivitas) tahap.push({ jenis: 'aktivitas' });
@@ -56,6 +58,7 @@ export function viewLesson(idStr) {
     aturProgress();
     const t = tahap[state.i];
     if (!t) return renderSelesai();
+    if (t.jenis === 'intro') return renderIntro(t.data);
     if (t.jenis === 'belajar') return renderBelajar(t.data);
     if (t.jenis === 'kuis') return renderKuis();
     if (t.jenis === 'aktivitas') return renderAktivitas();
@@ -70,6 +73,18 @@ export function viewLesson(idStr) {
       class: 'btn-bacakan', type: 'button', 'aria-label': 'Bacakan materi',
       onclick: (e) => { e.currentTarget.blur(); bacakan(teks); },
     }, '🔊 Bacakan');
+  }
+
+  // ---- Tahap: intro (tujuan belajar) ----
+  function renderIntro(pd) {
+    pasang(isi, el('div', { class: 'step teach' }, [
+      el('div', { class: 'teach__mascot mascot mascot--float', html: mascotSVG('semangat') }),
+      el('div', { class: 'intro__label' }, `Pertemuan ${p.id}`),
+      el('h3', {}, `${p.emoji} ${p.judul}`),
+      el('p', { class: 'intro__sub' }, '🎯 Yang akan kamu pelajari:'),
+      el('ul', { class: 'tujuan-list' }, pd.tujuan.map((t) => el('li', {}, t))),
+      el('div', { class: 'step-nav' }, [el('button', { class: 'btn btn--pink', onclick: maju }, 'Ayo Mulai! ✨')]),
+    ]));
   }
 
   // ---- Tahap: belajar (slide) ----
@@ -312,6 +327,12 @@ export function viewLesson(idStr) {
       ]),
       el('p', { style: { fontSize: '1.15rem', fontWeight: 700 } }, `Kamu dapat lencana baru: ${p.lencana.nama}!`),
       el('div', { class: 'finish__stars' }, bintangTeks(bintang)),
+      panduan && panduan.ringkasan
+        ? el('div', { class: 'ringkasan-box' }, [
+            el('p', { class: 'ringkasan-judul' }, '✅ Yang kamu kuasai hari ini:'),
+            el('ul', { class: 'ringkasan-list' }, panduan.ringkasan.map((r) => el('li', {}, r))),
+          ])
+        : null,
       karyaBox,
       el('div', { class: 'finish__btns' }, [
         el('button', { class: 'btn btn--ghost', onclick: () => { suara.klik(); state.i = 0; state.benar = 0; state.karya = null; render(); } }, 'Ulangi 🔁'),

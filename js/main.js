@@ -8,15 +8,19 @@
 
 import { pasang } from './ui.js';
 import { suara, bangunkanAudio } from './sound.js';
-import { suaraAktif, setSuara } from './storage.js';
+import { suaraAktif, setSuara, catatStreak } from './storage.js';
 import { stopBacakan } from './tts.js';
 import { viewHome } from './views/home.js';
 import { viewMap } from './views/map.js';
 import { viewLesson } from './views/lesson.js';
 import { viewGaleri } from './views/galeri.js';
 import { viewSertifikat } from './views/sertifikat.js';
+import { viewLaporan } from './views/laporan.js';
 
 const app = document.getElementById('app');
+
+// Catat kehadiran hari ini untuk streak (sekali saat aplikasi dibuka).
+catatStreak();
 
 function render() {
   const hash = location.hash || '#/';
@@ -29,6 +33,7 @@ function render() {
   else if (bagian[0] === 'pelajaran') view = viewLesson(bagian[1]);
   else if (bagian[0] === 'galeri') view = viewGaleri();
   else if (bagian[0] === 'sertifikat') view = viewSertifikat();
+  else if (bagian[0] === 'laporan') view = viewLaporan();
   else view = viewHome();
 
   pasang(app, view);
